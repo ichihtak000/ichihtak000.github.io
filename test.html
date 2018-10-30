@@ -9,10 +9,10 @@ table, td {
 <body>
 <div id="result"></div>
 
-First name: <input type="text" id ="column1" name="FirstName" value="Mickey"><br>
-Last name: <input type="text" id="row1" name="LastName" value="Mouse"><br>
+First name: <input type="text" id ="text1" name="FirstName" value="Mickey"><br>
+Last name: <input type="text" id="text2" name="LastName" value="Mouse"><br>
 
-<input type="button" id="myBtn" onclick="myFunction()" value="Submit">
+<input type="button" id="myBtn" onclick="myCreateFunction()" value="Submit">
 
 
 <p id="demo"></p>
@@ -41,12 +41,14 @@ Last name: <input type="text" id="row1" name="LastName" value="Mouse"><br>
 <script>
 function myCreateFunction() {
     var table = document.getElementById("myTable");
-    var x = document.getElementById("myTable").rows.length
+    var x = document.getElementById("myTable").rows.length;
+	var text = document.getElementById("text1").value;
+	var value = document.getElementById("text2").value;
     var row = table.insertRow(x-1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
-    cell1.innerHTML = "New cell" + x;
-    cell2.innerHTML = "NEW CELL" + x + 2;
+    cell1.innerHTML = text;
+    cell2.innerHTML = value;
 }
 
 function myDeleteFunction() {
@@ -59,7 +61,7 @@ function myFunction() {
 // Check browser support
 	if (typeof(Storage) !== "undefined") {
 		// Store
-		var x = document.getElementById("column1").value;
+		var x = document.getElementById("text1").value;
 		localStorage.setItem("lastname", x);
 		// Retrieve
 		
@@ -68,16 +70,6 @@ function myFunction() {
 	}
 }
 
-function myFunction2() {
-	if (typeof(Storage) !== "undefined") {
-		// Store
-		var x = localStorage.getItem("lastname");
-		// Retrieve
-		document.getElementById("demo").innerHTML = x;
-	} else {
-		document.getElementById("demo").innerHTML = "Sorry, your browser does not support Web Storage...";
-	}
-}
 </script>
 <script>
 	if (typeof(Storage) !== "undefined") {
