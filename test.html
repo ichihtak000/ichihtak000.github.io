@@ -9,8 +9,8 @@ table, td {
 <body>
 <div id="result"></div>
 
-First name: <input type="text" id ="text1" name="FirstName" value="Mickey"><br>
-Last name: <input type="text" id="text2" name="LastName" value="Mouse"><br>
+First name: <input type="button" id ="text1" name="FirstName" value="0" onclick="add()"><br>
+Last name: <input type="button" id="text2" name="LastName" value="10" onclick="add()"><br>
 
 <input type="button" id="myBtn" onclick="myCreateFunction()" value="Submit">
 
@@ -39,7 +39,19 @@ Last name: <input type="text" id="text2" name="LastName" value="Mouse"><br>
 <button onclick="myDeleteFunction()">Delete row</button>
 
 <script>
+function add(){
+	var x = document.getElementById("text1").disabled;
+	var y = document.getElementById("text2").disabled;
+    if(x || !y){
+    	document.getElementById("text1").disabled = false;
+		document.getElementById("text2").disabled = true;
+    }else{
+		document.getElementById("text1").disabled = true;
+		document.getElementById("text2").disabled = false;
+    }
+}
 function myCreateFunction() {
+	var a = document.getElementById("text1").disabled;
     var table = document.getElementById("myTable");
     var x = document.getElementById("myTable").rows.length;
 	var text = document.getElementById("text1").value;
@@ -47,6 +59,12 @@ function myCreateFunction() {
     var row = table.insertRow(x-1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
+	if(!a){
+		var temp = 0;
+		temp = text;
+		text = value;
+		value = temp;
+	}
     cell1.innerHTML = text;
     cell2.innerHTML = value;
 }
