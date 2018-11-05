@@ -1,241 +1,222 @@
 <!DOCTYPE html>
 <html>
-<style>
-table, td {
-    border: 1px solid black;
-}
-
-.button-On {
-    background-color: #00FF00; /* Green */
-    border: 1px;
-    color: blue;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-}
-
-.button-Off{
-    background-color: #4CAF50; /* Green */
-    border: 2px;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-}
-
-.table{
-    text-align:center;
-    position:center;
-}
-
-</style>
-</head>
-<body>
-<div id="result"></div>
-
-<input type="number" id="team" name="team"><br>
-<input class="button-Off" type="button" id="auto1" name="auto1" value="0" onclick="choose(this)">
-<input class="button-Off" type="button" id="auto2" name="auto2" value="30" onclick="choose(this)">
-Landing<br>
-
-<input class="button-Off" type="button" id="auto3" name="auto3" value="0" onclick="choose(this)">
-<input class="button-Off" type="button" id="auto4" name="auto4" value="25" onclick="choose(this)">
-Sampling<br>
-<input class="button-Off" type="button" id="auto5" name="auto5" value="0" onclick="choose(this)">
-<input class="button-Off" type="button" id="auto6" name="auto6" value="15" onclick="choose(this)">
-Claiming<br>
-<input class="button-Off" type="button" id="auto7" name="auto7" value="0" onclick="choose(this)">
-<input class="button-Off" type="button" id="auto8" name="auto8" value="10" onclick="choose(this)">
-Parking<br>
-<input class="button-Off" type="button" id="myBtn" onclick="addAutoTable()" value="Submit">
-
-
-<p id="demo"></p>
-<p id="say"></p>
-
-<p>Click the buttons to create and delete row(s) for the table.</p>
-
-<table class="table" id="scoreTable">
-  <tr>
-    <td>Team</td>
-    <td>Autonomous</td>
-    <td>TeleOp</td>
-    <td>End Game</td>
-    <td>Total</td>
-  </tr>
-</table>
-<br>
-
-<button onclick="addTable()">Create row</button>
-<button onclick="deleteTable()">Delete row</button>
-
-<script>
-function choose(object){
-	var a = document.getElementById("auto1").disabled;
-	var b = document.getElementById("auto2").disabled;
-	var c = document.getElementById("auto3").disabled;
-	var d = document.getElementById("auto4").disabled;
-	var e = document.getElementById("auto5").disabled;
-	var f = document.getElementById("auto6").disabled;
-	var g = document.getElementById("auto7").disabled;
-	var h = document.getElementById("auto8").disabled;
-	if(object.getAttribute("id") == "auto1" || object.getAttribute("id") == "auto2"){
-    	if(!a&&!b){
-    	    object.disabled = true;
-    	    object.className="button-On";
-        }else if(a || !b){
-        	document.getElementById("auto1").disabled = false;
-    		document.getElementById("auto2").disabled = true;
-    		document.getElementById("auto1").className = "button-Off";
-    		document.getElementById("auto2").className = "button-On";
-        }else{
-    		document.getElementById("auto1").disabled = true;
-    		document.getElementById("auto2").disabled = false;
-    		document.getElementById("auto1").className = "button-On";
-    		document.getElementById("auto2").className = "button-Off";
-        }
-	}
-    
-    if(object.getAttribute("id") == "auto3" || object.getAttribute("id") == "auto4"){
-        if(!c&&!d){
-    	    object.disabled = true;
-    	    object.className="button-On";
-        }else if(c || !d){
-        	document.getElementById("auto3").disabled = false;
-    		document.getElementById("auto4").disabled = true;
-    		document.getElementById("auto3").className = "button-Off";
-    		document.getElementById("auto4").className = "button-On";
-        }else{
-    		document.getElementById("auto3").disabled = true;
-    		document.getElementById("auto4").disabled = false;
-    		document.getElementById("auto3").className = "button-On";
-    		document.getElementById("auto4").className = "button-Off";
-        }
-    }
-    
-    if(object.getAttribute("id") == "auto5" || object.getAttribute("id") == "auto6"){
-    	if(!e&&!f){
-    	    object.disabled = true;
-    	    object.className="button-On";
-        }else if(e || !f){
-        	document.getElementById("auto5").disabled = false;
-    		document.getElementById("auto6").disabled = true;
-    		document.getElementById("auto5").className = "button-Off";
-    		document.getElementById("auto6").className = "button-On";
-        }else{
-    		document.getElementById("auto5").disabled = true;
-    		document.getElementById("auto6").disabled = false;
-    		document.getElementById("auto5").className = "button-On";
-    		document.getElementById("auto6").className = "button-Off";
-        }
-	}
-    
-    if(object.getAttribute("id") == "auto7" || object.getAttribute("id") == "auto8"){
-        if(!g&&!h){
-    	    object.disabled = true;
-    	    object.className="button-On";
-        }else if(g || !h){
-        	document.getElementById("auto7").disabled = false;
-    		document.getElementById("auto8").disabled = true;
-    		document.getElementById("auto7").className = "button-Off";
-    		document.getElementById("auto8").className = "button-On";
-        }else{
-    		document.getElementById("auto7").disabled = true;
-    		document.getElementById("auto8").disabled = false;
-    		document.getElementById("auto7").className = "button-On";
-    		document.getElementById("auto8").className = "button-Off";
-        }
-    }
-    document.getElementById("demo").innerHTML = object.getAttribute("id");
-}
-function addAutoTable() {
-	var b = document.getElementById("auto2").disabled;
-	var d = document.getElementById("auto4").disabled;
-	var f = document.getElementById("auto6").disabled;
-	var h = document.getElementById("auto8").disabled;
-    var table = document.getElementById("scoreTable");
-    var x = document.getElementById("scoreTable").rows.length;
-	var a2 = document.getElementById("auto2").value;
-	var a4 = document.getElementById("auto4").value;
-	var a6 = document.getElementById("auto6").value;
-	var a8 = document.getElementById("auto8").value;
-    var row = table.insertRow(x);
-    var row1 = row.insertCell(0);
-    var row2 = row.insertCell(1);
-    
-	if(!b){
-	    a2 = "0";
-	}
-	if(!d){
-	    a4 = "0";
-	}
-	if(!f){
-	    a6 = "0";
-	}
-	if(!h){
-	    a8 = "0";
-	}
-	var scoreAutoStore = [];
-	var score = (+a2)+(+a4)+(+a6)+(+a8);
-	scoreAutoStore[x] = score;
-	
-    row2.innerHTML =  score;
-    
-    row1.innerHTML = document.getElementById("team").value;
-    
-    
-    if (typeof(Storage) !== "undefined") {
-		// Store
-		//var x = document.getElementById("team").value;
-		var table = document.getElementById("scoreTable").rows.length;
-		for(var i=0; table-1; i++){
-		   localStorage.setItem("autoScore" + i, scoreAutoScore[i]);
-		}
-		localStorage.setItem("tableLength",table);
-		//localStorage.setItem("team", x);
-		// Retrieve
-		
-	} else {
-		//document.getElementById("demo").innerHTML = "Sorry, your browser does not support Web Storage...";
-	}
-}
-
-function deleteTable() {
-	var x = document.getElementById("scoreTable").rows.length
-    document.getElementById("scoreTable").deleteRow(x-1);
-}
-
-</script>
-<script>
-	if (typeof(Storage) !== "undefined") {
-		// Store
-		//var x = localStorage.getItem("team");
-		// Retrieve
-// 		document.getElementById("scoreTable").innerHTML = x;
-		
-		var table = document.getElementById("scoreTable");
-// 	var a2 = document.getElementById("auto2").value;
-// 	var a4 = document.getElementById("auto4").value;
-// 	var a6 = document.getElementById("auto6").value;
-// 	var a8 = document.getElementById("auto8").value;
-//     var row = table.insertRow(x);
-//     var row1 = row.insertCell(0);
-//     var row2 = row.insertCell(1);
-        var x = localStorage.getItem("tableLength");
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            div{
+                border: 50px;
+                border-color:'blue';
+                padding:10px 10px;
+                display: inline-block;
+                width: 150px;
+                height: 200px;
+                background-color: coral;
+                color: white;
+            }  
+            
+            #auto{
+                background-color:'red';
+                border: 50px;
+                border-color:'blue';
+                padding:10px 10px;
+                display: inline-block;
+                width: 150px;
+                height: 200px;
+                background-color: coral;
+                color: white;
+            }
+            
+            table, td {
+                border: 1px solid black;
+            }
+            
+            
+            
+            .button-On {
+                background-color: #00FF00;
+                border: 5px;
+                color: blue;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 14px;
+            }
+            
+            .button-Off{
+                background-color: #4CAF50; 
+                border: 5px;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 14px;
+            }
+        </style>
+    </head>
+    <body>
         
-        for(int i=1; i<table-1;i++){
-            var row = table.insertRow(i);
-            var row1 = row.inserCell(0);
-            var row2 = row.insertCell(1);
-            table.row2.innerHTML = 100;
+            <input type="number" id="team" name="team" value="0"><br>
+            <div id="auto">
+                Autonomous<br>
+                <input class="button-Off" type="button" id="landing" name="landing" value="30" onclick="chooseAuto(this)">Landing<br>
+                <input class="button-Off" type="button" id="sampling" name="sampling" value="25" onclick="chooseAuto(this)">Sampling<br>
+                <input class="button-Off" type="button" id="claiming" name="claiming" value="15" onclick="chooseAuto(this)">Claiming<br>
+                <input class="button-Off" type="button" id="parking" name="parking" value="10" onclick="chooseAuto(this)">Parking<br>
+            </div>
+            <div id="end">
+                <input class="button-Off" type="button" id="claiming" name="claiming" value="15" onclick="">Claiming<br>
+                <input class="button-Off" type="button" id="parking" name="parking" value="10" onclick="chooseAuto(this)">Parking<br>
+                <input class="button-Off" type="button" id="claiming" name="claiming" value="15" onclick="chooseAuto(this)">Claiming<br>
+            </div>
+            <br>
+            
+            <input class="button-Off" type="button" id="submit" onmousedown= "addTable()" onmouseup="colorBack(this)" value="Submit"><br>
+            
+            <input class="button-Off" type="button" id="clear" onmousedown="clearData()" onmouseup="colorBack(this)" value="Clear"><br>
+            
+            <p id="demo"></p>
+            <p id="say"></p>
+        
+        <table class="table" id="scoreTable">
+          <tr>
+            <td>Team</td>
+            <td>Autonomous</td>
+            <td>TeleOp</td>
+            <td>End Game</td>
+            <td>Total</td>
+          </tr>
+        </table>
+        <br>
+        <div id="myDIV">
+        <script>
+        var land = false;
+        var sample = false;
+        var claim = false;
+        var park = false;
+        
+        var autoScores = [];
+        var teleOpScore = [];
+        var endGameScore = [];
+        
+        function chooseAuto(object){
+        	var objectId = object.getAttribute("id");
+        	if(objectId == "landing"){
+        	    if(!land){
+        	        document.getElementById(objectId).className = "button-On";
+        	        land = true;
+        	    }else{
+        	        document.getElementById(objectId).className = "button-Off";
+        	        land = false;
+        	    }
+        	}
+        	if(objectId == "sampling"){
+        	    if(!sample){
+        	        document.getElementById(objectId).className = "button-On";
+        	        sample = true;
+        	    }else{
+        	        document.getElementById(objectId).className = "button-Off";
+        	        sample = false;
+        	    }
+        	}
+        	if(objectId == "claiming"){
+        	    if(!claim){
+        	        document.getElementById(objectId).className = "button-On";
+        	        claim = true;
+        	    }else{
+        	        document.getElementById(objectId).className = "button-Off";
+        	        claim = false;
+        	    }
+        	}
+        	if(objectId == "parking"){
+        	    if(!park){
+        	        document.getElementById(objectId).className = "button-On";
+        	        park = true;
+        	    }else{
+        	        document.getElementById(objectId).className = "button-Off";
+        	        park = false;
+        	    }
+        	}
         }
-	} else {
-		//document.getElementById("demo").innerHTML = "Sorry, your browser does not support Web Storage...";
-	}
-</script>
-</body>
+        
+        function addTable(){
+            var button = document.getElementById("submit");
+            button.style.backgroundColor = "lightblue";
+            addAutoTable();
+            var scoreLength = document.getElementById("scoreTable").rows.length -1;
+            localStorage.setItem("rowNum",scoreLength);
+        }
+        
+        function addAutoTable() {
+            var table = document.getElementById("scoreTable");
+            var tableLength = table.rows.length;
+            var row = table.insertRow(tableLength);
+            var row1 = row.insertCell(0);
+            var row2 = row.insertCell(1);
+            
+            var landScore = 0;
+            var sampleScore = 0;
+            var claimScore = 0;
+            var parkScore = 0;
+            var score = 0;
+            if(land){
+                landScore = 30;
+            }
+            if(sample){
+                sampleScore = 25;
+            }
+            if(claim){
+                claimScore = 15;
+            }
+            if(park){
+                parkScore = 10;
+            }
+            score = landScore + sampleScore + claimScore + parkScore;
+            
+            row2.innerHTML = score;
+            autoScores[tableLength] = score;
+            
+            if (typeof(Storage) !== "undefined") {
+        		for(var i=1; i<autoScores.length; i++){
+                    document.getElementById("scoreTable").rows[i].cells[0].innerHTML = autoScores[i];
+                    localStorage.setItem("autoScore" + i, autoScores[i]);
+                }
+        	} else {
+        		document.getElementById("demo").innerHTML = "Sorry, your browser does not support Web Storage...";
+        	}
+        }
+        
+        //document.getElementById("demo").innerHTML = "autoScore " + 89;
+        	//var x = document.getElementById("scoreTable").rows.length
+            //document.getElementById("scoreTable").deleteRow(x-1);
+        
+        function clearData(){
+            var button = document.getElementById("clear");
+            button.style.backgroundColor = "lightblue";
+            localStorage.clear();
+        }
+        
+        function colorBack(object){
+            object.style.backgroundColor = '#4CAF50';
+        }
+        
+        </script>
+        <script>
+        	if (typeof(Storage) !== "undefined") {
+        		var scoreLength = localStorage.getItem("rowNum");
+        		document.getElementById("say").innerHTML = scoreLength;
+        		for(var i=1; i<=scoreLength; i++){
+        		    var table = document.getElementById("scoreTable");
+                    var row = table.insertRow(i);
+                    var row1 = row.insertCell(0);
+                    var row2 = row.insertCell(1);
+        		    var score = localStorage.getItem("autoScore" + i);
+        		    row2.innerHTML = score;
+        		}
+        	} else {
+        		document.getElementById("demo").innerHTML = "Sorry, your browser does not support Web Storage...";
+        	}
+        </script>
+    </body>
 </html>
