@@ -30,11 +30,17 @@
             </div>
             <div class="scores" id="tele">
                 TeleOp<br>
+                <input type ="number" id="depot" name="depot" value="0">Depot<br>
+                <input class="button-Off" type="button" id="addDepot" name="addDepot" value="+2" onmousedown="teleOp(this)" onmouseup="colorBack(this)">
+                <input class="button-Off" type="button" id="deleteDepot" name="deleteDepot" value="-2" onmousedown="teleOp(this)" onmouseup="colorBack(this)"><br>
+                <input type="number" id="cargo" name="cargo" value="0">Cargo Hold<br>
+                <input class="button-Off" type="button" id="addCargo" name="addCargo" value="+5" onmousedown="teleOp(this)" onmouseup="colorBack(this)">   
+                <input class="button-Off" type="button" id="deleteCargo" name="deleteCargo" value="-5" onmousedown="teleOp(this)" onmouseup="colorBack(this)">  
             </div>
             <div class="scores" id="end">
                 End-Game<br>
                 <input class="button-Off" type="button" id="partial" name="partial" value="15" onclick="chooseEnd(this)">Partially Parked<br>
-                <input class="button-Off" type="button" id="fully" name="fully" value="25" onclick="chooseEnd(this)">Full Parked<br>
+                <input class="button-Off" type="button" id="fully" name="fully" value="25" onclick="chooseEnd(this)">Fully Parked<br>
                 <input class="button-Off" type="button" id="latched" name="latched" value="50" onclick="chooseEnd(this)">Latched<br>
             </div>
         </div>    
@@ -43,11 +49,12 @@
         <div class="table">
             <table id="scoreTable">
               <tr>
+                <td>Match</td>
                 <td>Team</td>
+                <td>Total</td>
                 <td>Autonomous</td>
                 <td>TeleOp</td>
                 <td>End Game</td>
-                <td>Total</td>
               </tr>
             </table>
         </div>
